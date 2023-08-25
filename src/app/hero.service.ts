@@ -11,7 +11,7 @@ export class HeroService {
 
 
   getHeroes(): Observable<Hero[]> {
-    const heroes = of(HEROES);
+    const heroes = of(HEROES); // RxJS of() to return Observable<Hero[]>, an observable of mock heroes.
     this.messageService.add('HeroService: fetched heroes');
     return heroes;
   }

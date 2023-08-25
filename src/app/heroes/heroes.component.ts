@@ -13,7 +13,7 @@ export class HeroesComponent implements OnInit {
 
   selectedHero?: Hero;
 
-  heroes: Hero[] = [];
+  hheroes: Hero[] = [];
 
   constructor(private heroService: HeroService, private messageService: MessageService) { }// Permet de d'injecter le service 
 
@@ -28,7 +28,7 @@ export class HeroesComponent implements OnInit {
 
   getHeroes(): void {
     this.heroService.getHeroes()
-        .subscribe(heroes => this.heroes = heroes);
+        .subscribe(heroes => this.hheroes = heroes);
   }
 } 
 
