@@ -42,6 +42,14 @@ getHero(id: number): Observable<Hero> {
   );
 }
 
+  /** POST: add a new hero to the server */
+addHero(hero: Hero): Observable<Hero> {
+  return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
+    tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
+    catchError(this.handleError<Hero>('addHero'))
+  );
+}
+
   /** PUT: update the hero on the server */
   updateHero(hero: Hero): Observable<any> {
     return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
@@ -49,6 +57,17 @@ getHero(id: number): Observable<Hero> {
       catchError(this.handleError<any>('updateHero'))
   );
 }
+
+  /** DELETE: delete the hero from the server */
+deleteHero(id: number): Observable<Hero> {
+  const url = `${this.heroesUrl}/${id}`;
+
+  return this.http.delete<Hero>(url, this.httpOptions).pipe(
+    tap(_ => this.log(`deleted hero id=${id}`)),
+    catchError(this.handleError<Hero>('deleteHero'))
+  );
+}
+//If you neglect to subscribe(), the service can't send the delete request to the server. As a rule, an Observable does nothing until something subscribes.
 
 
 
